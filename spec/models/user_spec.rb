@@ -24,17 +24,27 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
+
       it 'emailが一意性でなければ登録できない' do
         @user.save
-        another_user = FactoryBot.build(:user)
+        another_user = FactoryBot.build(:user, email: @user.email)
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
+
+      # it 'emailが一意性でなければ登録できない' do
+      #   @user.save
+      #   another_user = FactoryBot.build(:user)
+      #   another_user.valid?
+      #   expect(another_user.errors.full_messages).to include('Email has already been taken')
+      # end
+
       it 'emailに@が含まれていなければ登録できない' do
         @user.email = 'testtest.com'
         @user.valid?
         expect(@user.errors.full_messages).to include('Email is invalid')
       end
+
       it 'passwordが空では登録できない' do
         @user.password = ''
         @user.valid?
@@ -107,6 +117,12 @@ RSpec.describe User, type: :model do
         @user.birth_date = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Birth date can't be blank")
+      end
+      it 'passwordが全角文字を含む場合は登録できない' do
+        @user.password = 'アbc123'
+        @user.password_confirmation = 'アbc123'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
       end
     end
   end
