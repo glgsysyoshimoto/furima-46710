@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
-  has_one :order
+  # has_one :order #購入機能で実装する内容
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
