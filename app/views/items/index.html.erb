@@ -129,8 +129,10 @@
     <ul class='item-lists'>
       <% if @items.present? %>
         <% @items.each do |item| %>      
-          <li class='list'>        
-            <%= link_to item_path(item) do %>
+          <li class='list'>
+            <%# 詳細機能で実装する内容のため、現段階ではコメントアウト %>
+            <%#= link_to item_path(item) do %>             
+            <%= link_to "#" do %>
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" %>
                 <%# 購入機能がまだ実装されていないので、has_one :order をコメントアウトした。一次的にコメントアウト %>
