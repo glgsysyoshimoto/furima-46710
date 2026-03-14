@@ -84,6 +84,11 @@ end
 
 group :development, :test do
   gem 'faker'
+  gem 'database_cleaner-active_record'
 end
 
 gem 'active_hash'
+
+gem 'payjp'
+
+gem 'gon'
